@@ -10,10 +10,11 @@ class DbConnect
     protected $connection;
     protected $request;
 
-    const SERVER = 'localhost';
+    const SERVER = 'db';  // Changer localhost par le nom du service MySQL
     const USER = 'root';
-    const PASSWORD = '';
+    const PASSWORD = '';   // Le mot de passe vide, selon votre configuration
     const BASE = 'coursportfolio';
+
 
     public function __construct()
     {

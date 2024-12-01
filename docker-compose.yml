@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  # Service pour l'application PHP
+  portfolio-app:
+    build: .
+    container_name: portfolio-container
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    networks:
+      - portfolio-network
+    depends_on:
+      - db
+
+  # Service pour la base de données MySQL
+  db:
+    image: mysql:5.7
+    container_name: portfolio-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password   # Définir le mot de passe root pour MySQL
+      MYSQL_DATABASE: coursportfolio       # Nom de la base de données à créer
+      MYSQL_USER: root                     # Nom de l'utilisateur MySQL
+      MYSQL_PASSWORD: ""                   # Mot de passe de l'utilisateur MySQL (vide dans votre code)
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - portfolio-network
+
+networks:
+  portfolio-network:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local
+
